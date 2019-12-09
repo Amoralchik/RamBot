@@ -1,7 +1,13 @@
+import functools
+import itertools
+import math
+import asyncio
 import discord
+import youtube_dl
 import os
 import random
-from discord.ext import commands
+from discord.ext import commands , tasks
+from itertools import cycle
 
 class Ball(commands.Cog):
 #Класс 2
@@ -33,7 +39,7 @@ class Ball(commands.Cog):
 
 
 	#команда выдаюшая рандомную загадку
-	@commands.command(aliases=["pball","P"])
+	@commands.command(aliases=["pball","P","p"])
 	async def Pball(self, ctx):
 		""" "pball","P" задачка с Проекта Эйлера"""
 		Pball = ["Если выписать все натуральные числа меньше 10, кратные 3 или 5, то получим 3, 5, 6 и 9. Сумма этих чисел равна 23. \n Найдите сумму всех чисел меньше 1000, кратных 3 или 5.",
