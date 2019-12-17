@@ -33,4 +33,6 @@ for filename in os.listdir("./Cogs"):
 	if filename.endswith(".py"):
 		bot.load_extension(f"Cogs.{filename[:-3]}")
 
-bot.run(BOT_TOKEN)
+Token = os.environ.get("BOT_TOKEN")
+
+bot.run(str(Token))
