@@ -11,7 +11,6 @@ import youtube_dl
 from itertools import cycle
 from async_timeout import timeout
 from discord.ext import commands , tasks
-from TOKEN import BOT_TOKEN
 
 Version =  ("Версия: 0.60 // дата последнего обновления 17/12/2019")
 status = cycle([ Version, "Няшется с цатиком", "Ждет ваших команд", "+help"])
