@@ -282,6 +282,9 @@ class Music(commands.Cog):
     async def cog_command_error(self, ctx: commands.Context, error: commands.CommandError):
         await ctx.send('An error occurred: {}'.format(str(error)))
 
+    if not discord.opus.is_loaded():
+        discord.opus.load_opus('libopus.so')
+
     @commands.command(name='join', invoke_without_subcommand=True)
     async def _join(self, ctx: commands.Context):
         """Присоединяется к голосовому каналу."""
