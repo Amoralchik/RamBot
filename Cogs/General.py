@@ -12,7 +12,7 @@ from itertools import cycle
 class General(commands.Cog):
 	#Класс 3
 
-	def __init__(self, bot, Version):
+	def __init__(self, bot):
 		self.bot = bot
 		self._last_member = None
 
