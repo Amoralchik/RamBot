@@ -1,4 +1,4 @@
-"""RAM BOT 0.050 by Amoralchik.""" 
+"""RAM BOT 0.050 by Amoralchik."""
 
 import asyncio
 import functools
@@ -13,13 +13,14 @@ from async_timeout import timeout
 from discord.ext import commands , tasks
 from TOKEN import BOT_TOKEN
 
-status = cycle(["Верисия:0.050", "Няшется с цатиком", "Ждет ваших команд"])
+Version =  ("Версия: 0.60 // дата последнего обновления 17/12/2019")
+status = cycle([ Version, "Няшется с цатиком", "Ждет ваших команд", "+help"])
 
 #Префикс вызова бота
 bot = commands.Bot(command_prefix=commands.when_mentioned_or("+"),
-                   description='???')
+                   description=' RAM BOT 0.055 by Amoralchik. ')
 
-@tasks.loop(seconds=50)
+@tasks.loop(seconds=60)
 async def change_status():
 	await bot.change_presence(activity=discord.Game(next(status)))
 

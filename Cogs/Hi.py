@@ -10,27 +10,18 @@ from discord.ext import commands , tasks
 from itertools import cycle
 
 class Hi(commands.Cog):
-#Класс 1
+	#Класс 1
 	def __init__(self, bot):
 		self.bot = bot
 		self._last_member = None
 
 	@commands.Cog.listener()
-	async def on_message(self, message):
-	# уже работает, и говорит привет на привет =_=
+	async def on_message(self, message, my_str='привет рам'):
 
-		if message.content == 'Привет рам':
-			await message.channel.send("Привет няш <:lewd:443438908697739274>")
-		elif message.content == 'Привет Рам':
-			await message.channel.send("Привет няш <:lewd:443438908697739274>")
-		elif message.content == 'Привет Рам чян':
-			await message.channel.send("Привет няш <:lewd:443438908697739274>")
-		elif message.content == 'Привет рам чян':
-			await message.channel.send("Привет няш <:lewd:443438908697739274>")
-		elif message.content == 'привет рам':
-			await message.channel.send("Привет няш <:lewd:443438908697739274>")
-		elif message.content == 'привет рам чян':
-			await message.channel.send("Привет няш <:lewd:443438908697739274>")
+		if "привет рам" in message.content.lower():
+			await message.channel.send("Привет няш <:RamOwO:656438972284796928>")
+		elif message.author.id == 306125994396483587 and "Тоша бака" in message.content.lower() :
+			await message.channel.send("дя, тоша бяка <:remhmpf:652885984115163196>")
 
 	@commands.Cog.listener()
 	async def on_member_join(self, member):
@@ -53,15 +44,17 @@ class Hi(commands.Cog):
 	async def Yes(self, ctx,):
 		""" "+","yes","lf","да","Да" """
 		Yes = ["Да","+"]
-		await ctx.send(f"{random.choice(Yesornot)}")
+		await ctx.send(f"{random.choice(Yes)}")
 
-	@commands.command(aliases=["Megi"])
-	async def megi(self, ctx,):
-		""" "megi" """
+	@commands.command(aliases=["Mugi"])
+	async def mugi(self, ctx,):
+		""" "mugi" """
 		await ctx.send(f"<:mugi1:652603865069518848><:mugi2:652603713801682976><:mugi3:652603701239873623>")
-		
-	@commands.command()
-	async def Povtor(self, ctx, *, arg):
+
+	@commands.command(aliases=["povtor", "Повтор", "повтор"])
+	async def Povtor(self, ctx, *, arg,):
+		""" "povtor", "Повтор", "повтор" """
+		await ctx.channel.purge(limit=1)
 		await ctx.send(arg)
 
 def  setup(client):

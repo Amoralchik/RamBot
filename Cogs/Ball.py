@@ -10,7 +10,7 @@ from discord.ext import commands , tasks
 from itertools import cycle
 
 class Ball(commands.Cog):
-#Класс 2
+	#Класс 2
 	def __init__(self, bot):
 		self.bot = bot
 		self._last_member = None
