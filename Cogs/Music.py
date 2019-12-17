@@ -282,8 +282,9 @@ class Music(commands.Cog):
     async def cog_command_error(self, ctx: commands.Context, error: commands.CommandError):
         await ctx.send('An error occurred: {}'.format(str(error)))
 
+    discord.opus.load_opus()
     if not discord.opus.is_loaded():
-        discord.opus.load_opus('libopus.so')
+        raise RunTimeError('Opus failed to load')
 
     @commands.command(name='join', invoke_without_subcommand=True)
     async def _join(self, ctx: commands.Context):
