@@ -17,16 +17,16 @@ status = cycle([ Version, "Няшется с цатиком", "Ждет ваши
 
 #Префикс вызова бота
 bot = commands.Bot(command_prefix=commands.when_mentioned_or("+"),
-                   description=' RAM BOT 0.055 by Amoralchik. ')
+                   description=Version)
 
-@tasks.loop(seconds=60)
+@tasks.loop(seconds=30)
 async def change_status():
 	await bot.change_presence(activity=discord.Game(next(status)))
 
 @bot.event
 async def on_ready():
 	change_status.start()
-	print("Вход как: {0.user}".format(bot) + " Выполнен." )
+	print("Вход как: {0.user}".format(bot) + " Выполнен. " + Version )
 
 for filename in os.listdir("./Cogs"):
 	if filename.endswith(".py"):
