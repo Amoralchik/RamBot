@@ -30,7 +30,7 @@ class Hi(commands.Cog):
 			await message.channel.send("Привет Вуф вуф вульфик <:RamOwO:656438972284796928>")
 		elif message.author.id == 270937744455237632 and "привет рам" in message.content.lower():	
 			await message.channel.send("Привет Вельзик <:RamOwO:656438972284796928>")
-		elif not(message.author.id == 270937744455237632, 306125994396483587, 311255280442933248, 419066289298997250, 279550029981548545, 272318540722339840) and "привет рам" in message.content.lower():
+		elif not (message.author.id == 270937744455237632 or 306125994396483587 or 311255280442933248 or 419066289298997250 or 279550029981548545 or 272318540722339840) and "привет рам" in message.content.lower():
 			await message.channel.send("Привет няш <:RamOwO:656438972284796928>")
 		elif message.author.id == 306125994396483587 and "тоша бака" in message.content.lower():
 			await message.channel.send("дя, тоша бяка <:remhmpf:652885984115163196>")
