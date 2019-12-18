@@ -20,19 +20,21 @@ class Hi(commands.Cog):
 		
 		if message.author.id == 306125994396483587 and "привет рам" in message.content.lower():
 			await message.channel.send("Привет Аморальчик <:RemKiss:656439154225315850>")
-		if message.author.id == 419066289298997250 and "привет рам" in message.content.lower():
+		elif message.author.id == 311255280442933248 and "привет рам" in message.content.lower():
+			await message.channel.send("Привет Анишечка <:NICE:443438905027461150>")
+		elif message.author.id == 419066289298997250 and "привет рам" in message.content.lower():
 			await message.channel.send("Привет Ддешка <:RamOwO:656438972284796928>")
-		if message.author.id == 279550029981548545 and "привет рам" in message.content.lower():
+		elif message.author.id == 279550029981548545 and "привет рам" in message.content.lower():
 			await message.channel.send("Привет Тошик <:RamOwO:656438972284796928>")
-		if message.author.id == 272318540722339840 and "привет рам" in message.content.lower():
+		elif message.author.id == 272318540722339840 and "привет рам" in message.content.lower():
 			await message.channel.send("Привет Вуф вуф вульфик <:RamOwO:656438972284796928>")
-		if message.author.id == 270937744455237632 and "привет рам" in message.content.lower():	
+		elif message.author.id == 270937744455237632 and "привет рам" in message.content.lower():	
 			await message.channel.send("Привет Вельзик <:RamOwO:656438972284796928>")
-		elif not(message.author.id == 270937744455237632, 419066289298997250, 279550029981548545, 272318540722339840) and "привет рам" in message.content.lower():
+		elif not(message.author.id == 270937744455237632, 306125994396483587, 311255280442933248, 419066289298997250, 279550029981548545, 272318540722339840) and "привет рам" in message.content.lower():
 			await message.channel.send("Привет няш <:RamOwO:656438972284796928>")
-		if message.author.id == 306125994396483587 and "тоша бака" in message.content.lower():
+		elif message.author.id == 306125994396483587 and "тоша бака" in message.content.lower():
 			await message.channel.send("дя, тоша бяка <:remhmpf:652885984115163196>")
-		if message.author.id == 306125994396483587 and "рам и рем" in message.content.lower():	
+		elif message.author.id == 306125994396483587 and "рам и рем" in message.content.lower():	
 			await message.channel.send("<:RamKiss:656439218733580309> <:RemKiss:656439154225315850>")
 
 	@commands.Cog.listener()
