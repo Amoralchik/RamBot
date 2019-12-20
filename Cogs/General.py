@@ -6,6 +6,7 @@ import discord
 import youtube_dl
 import os
 import random
+import json
 from discord.ext import commands , tasks
 from itertools import cycle
 
@@ -15,6 +16,20 @@ class General(commands.Cog):
 	def __init__(self, bot):
 		self.bot = bot
 		self._last_member = None
+
+	@commands.command()
+	@commands.has_permissions(administrator = True)
+	async def setprefix(self, ctx, prefix):
+		with open("prefixes.json","r") as f:
+			prefixes = json.load(f)
+	
+		prefixes[str(ctx.guild.id)] = prefix
+
+		with open("prefixes.json","w") as f:
+			json.dump(prefixes, f, indent=4)
+        
+		await ctx.send(f"Префихс изменнен на: {prefix}")
+
 
 	@commands.command(aliases=["Delete","d"])
 	@commands.has_permissions(administrator = True)
@@ -33,12 +48,6 @@ class General(commands.Cog):
 			await ctx.send(f"<:RamKiss:656439218733580309> пинг: {(round(self.bot.latency * 1000))}ms ")
 		elif self.bot.latency * 1000 <= 150:
 			await ctx.send(f"пинг: {(round(self.bot.latency * 1000))}ms <:RamOwO:656438972284796928> ")
-
-	#показывает версию бота.
-	@commands.command(aliases=["версия","Версия","vrs"])
-	async def Vrs(self, ctx):
-		""" "версия","Версия","vrs" показывает текушую версию бота"""
-		await ctx.send(f"<:RamKiss:656439218733580309> Версия: 0.60 // дата последнего обновления 17/12/2019 <:RemKiss:656439154225315850>")
 
 	#команда про меня
 	@commands.command(aliases=["Amo","amo","амо"])
