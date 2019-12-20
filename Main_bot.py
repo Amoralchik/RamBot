@@ -22,14 +22,13 @@ def get_prefix(bot, message):
 Version =  ("Версия: 0.80 // дата последнего обновления 20/12/2019")
 status = cycle([ Version, "Няшется с цатиком", "Ждет ваших команд", "*setprefix"])
 
+#Префикс вызова бота
+bot = commands.Bot(command_prefix=commands.when_mentioned_or(get_prefix),
+                   description=Version)
 @bot.command(aliases=["версия","Версия","vrs"])
 async def Vrs(self, ctx):
 	""" "версия","Версия","vrs" показывает текушую версию бота"""
 	await ctx.send(Version)
-
-#Префикс вызова бота
-bot = commands.Bot(command_prefix=commands.when_mentioned_or(get_prefix),
-                   description=Version)
 
 @tasks.loop(seconds=30)
 async def change_status():
