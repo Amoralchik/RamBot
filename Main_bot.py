@@ -8,15 +8,27 @@ import os
 import random
 import discord
 import youtube_dl
+import json
 from itertools import cycle
 from async_timeout import timeout
 from discord.ext import commands , tasks
 
-Version =  ("Версия: 0.60 // дата последнего обновления 17/12/2019")
-status = cycle([ Version, "Няшется с цатиком", "Ждет ваших команд", "+help"])
+def get_prefix(bot, message):
+	with open("prefixes.json", "r") as f:
+		prefixes = json.load(f)
+
+	return prefixes[str(message.guild.id)]  
+
+Version =  ("Версия: 0.80 // дата последнего обновления 20/12/2019")
+status = cycle([ Version, "Няшется с цатиком", "Ждет ваших команд", "*setprefix"])
+
+@bot.command(aliases=["версия","Версия","vrs"])
+async def Vrs(self, ctx):
+	""" "версия","Версия","vrs" показывает текушую версию бота"""
+	await ctx.send(Version)
 
 #Префикс вызова бота
-bot = commands.Bot(command_prefix=commands.when_mentioned_or("+"),
+bot = commands.Bot(command_prefix=commands.when_mentioned_or(get_prefix),
                    description=Version)
 
 @tasks.loop(seconds=30)
@@ -27,6 +39,26 @@ async def change_status():
 async def on_ready():
 	change_status.start()
 	print("Вход как: {0.user}".format(bot) + " Выполнен. " + Version )
+
+@bot.event
+async def on_guild_join(guild):
+	with open("prefixes.json", "r") as f:
+		prefixes = json.load(f)
+	
+	prefixes[str(guild.id)] = "*"
+
+	with open("prefixes.json", "w") as f:
+		json.dump(prefixes, f, indent=4)
+
+@bot.event
+async def on_guild_remove(guild):
+	with open("prefixes.json","r") as f:
+		prefixes = json.load(f)
+	
+	prefixes.pop[str(guild.id)]
+
+	with open("prefixes.json","w") as f:
+		json.dump(prefixes, f, indent=4)
 
 for filename in os.listdir("./Cogs"):
 	if filename.endswith(".py"):
