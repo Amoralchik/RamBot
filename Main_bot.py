@@ -1,4 +1,4 @@
-"""RAM BOT 0.050 by Amoralchik."""
+"""RAM BOT 0.85 by Amoralchik."""
 
 import asyncio
 import functools
@@ -19,16 +19,12 @@ def get_prefix(bot, message):
 
 	return prefixes[str(message.guild.id)]  
 
-Version =  ("Версия: 0.80 // дата последнего обновления 20/12/2019")
+Version =  ("Версия: 0.85 // дата последнего обновления 20/12/2019")
 status = cycle([ Version, "Няшется с цатиком", "Ждет ваших команд", "*setprefix"])
 
 #Префикс вызова бота
 bot = commands.Bot(command_prefix=get_prefix,
                    description=Version)
-@bot.command(aliases=["версия","Версия","vrs"])
-async def Vrs(self, ctx):
-	""" "версия","Версия","vrs" показывает текушую версию бота"""
-	await ctx.send(Version)
 
 @tasks.loop(seconds=30)
 async def change_status():
