@@ -10,8 +10,7 @@ import json
 from discord.ext import commands , tasks
 from itertools import cycle
 
-class General(commands.Cog):
-	#Класс 3
+class Administrator(commands.Cog):
 
 	def __init__(self, bot):
 		self.bot = bot
@@ -20,6 +19,7 @@ class General(commands.Cog):
 	@commands.command()
 	@commands.has_permissions(administrator = True)
 	async def setprefix(self, ctx, prefix):
+		"""Устанавливает префикс комманд бота, нельзя использовать упоминания/пробелы!"""
 		with open("prefixes.json","r") as f:
 			prefixes = json.load(f)
 	
@@ -30,30 +30,21 @@ class General(commands.Cog):
         
 		await ctx.send(f"Префихс изменнен на: {prefix}")
 
-
 	@commands.command(aliases=["Delete","d"])
 	@commands.has_permissions(administrator = True)
 	async def delete(self, ctx, amount: int):
-		""" УДАЛЯЕТ ВЫБРАННОЕ КОЛИЧЕСТВО СООБЩЕНИЙ """
+		""" Удаляет н количество сообщений (только для админов) """
 		await ctx.channel.purge(limit= amount)
 		await ctx.send("Удаленно " + str(amount) + " сообщений <:LewdMegumin:656439081747873802>")
-
-	#Показывает пинг
-	@commands.command(aliases=["Пинг","пинг"])
-	async def ping(self, ctx):
-		""" "Пинг","пинг" Показывает Пинг"""
-		if self.bot.latency * 1000 >= 150:
-			await ctx.send(f"пинг: {(round(self.bot.latency * 1000))}ms <:remhmpf:652885984115163196> ")
-		elif self.bot.latency * 1000 <= 100:
-			await ctx.send(f"<:RamKiss:656439218733580309> пинг: {(round(self.bot.latency * 1000))}ms ")
-		elif self.bot.latency * 1000 <= 150:
-			await ctx.send(f"пинг: {(round(self.bot.latency * 1000))}ms <:RamOwO:656438972284796928> ")
 
 	#команда про меня
 	@commands.command(aliases=["Amo","amo","амо"])
 	async def Амо(self, ctx):
+		"""Только для аморала"""
 		if ctx.message.author.id == 306125994396483587:
 			await ctx.send('Амо Амо Аморальчик <:RemKiss:656439154225315850>')
+		elif ctx.message.author.id == 419066289298997250:
+			await ctx.send('Хватит дедешка! ты не Аморальчик <:remhmpf:652885984115163196>')
 		else:
 			await ctx.send('Ты не Аномальчик')
 
@@ -64,4 +55,4 @@ class General(commands.Cog):
 
 
 def  setup(client):
-	client.add_cog(General(client))
+	client.add_cog(Administrator(client))
