@@ -23,7 +23,7 @@ Version =  ("Версия: 0.85 // дата последнего обновле�
 status = cycle([ Version, "Няшется с цатиком", "Ждет ваших команд", "*setprefix"])
 
 #Префикс вызова бота
-bot = commands.Bot(command_prefix=commands.when_mentioned_or(get_prefix),
+bot = commands.Bot(command_prefix= get_prefix,
                    description=Version)
 
 @tasks.loop(seconds=30)
