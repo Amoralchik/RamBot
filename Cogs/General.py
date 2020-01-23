@@ -20,6 +20,7 @@ class Administrator(commands.Cog):
 	@commands.has_permissions(administrator = True)
 	async def setprefix(self, ctx, prefix):
 		"""Устанавливает префикс комманд бота, нельзя использовать упоминания/пробелы!"""
+		
 		with open("prefixes.json","r") as f:
 			prefixes = json.load(f)
 	
@@ -34,13 +35,16 @@ class Administrator(commands.Cog):
 	@commands.has_permissions(administrator = True)
 	async def delete(self, ctx, amount: int):
 		""" Удаляет н количество сообщений (только для админов) """
+		
 		await ctx.channel.purge(limit= amount)
+		
 		await ctx.send("Удаленно " + str(amount) + " сообщений <:LewdMegumin:656439081747873802>")
 
 	#команда про меня
 	@commands.command(aliases=["Amo","amo","амо"])
 	async def Амо(self, ctx):
 		"""Только для аморала"""
+		
 		if ctx.message.author.id == 306125994396483587:
 			await ctx.send('Амо Амо Аморальчик <:RemKiss:656439154225315850>')
 		elif ctx.message.author.id == 419066289298997250:
@@ -50,6 +54,7 @@ class Administrator(commands.Cog):
 
 	@commands.Cog.listener()
 	async def on_command_error(self, ctx, error):
+		
 		if isinstance(error, commands.CommandNotFound):
 			await ctx.send("Извини няш, но что то пошло не так...<:smugram:656439012352983041>")
 

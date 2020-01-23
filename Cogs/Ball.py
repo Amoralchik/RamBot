@@ -39,14 +39,39 @@ class Ball(commands.Cog):
             		 "По моим данным — «нет»",
             		 "Перспективы не очень хорошие",
             		 "Весьма сомнительно"]
-		await ctx.send(f"Вопрос: {question} \n Ответ: {random.choice(responses)}")
+		
+		choice = {random.choice(responses)}
+
+		emb= discord.Embed( colour=discord.Colour.magenta())
+		emb.add_field(name= "**{0}**".format(question), value=  " ".join(choice))
+		emb.set_footer(text= "Requested by {}".format(ctx.author), icon_url= ctx.author.avatar_url)
+
+		await ctx.send(embed= emb)
 
 	#простая команда вывода да/нет
 	@commands.command(aliases=["данет","нетда","yesornot"])
 	async def Yesornot(self, ctx, *, question):
 		""" "данет","нетда","yesornot" говорит да/нет"""
+		
 		Yesornot = ["Да","Нет"]
-		await ctx.send(f"Вопрос: {question} \n {random.choice(Yesornot)}")
+
+		choice = {random.choice(Yesornot)}
+
+		emb= discord.Embed( colour=discord.Colour.magenta())
+		emb.add_field(name= "**{0}**".format(question), value= " ".join(choice))
+		emb.set_footer(text= "Requested by {}".format(ctx.author), icon_url= ctx.author.avatar_url)
+
+		await ctx.send(embed= emb)
+
+	@commands.command()
+	async def choose(self, ctx, *args):
+		""" args """
+		
+		emb= discord.Embed( colour=discord.Colour.magenta())
+		emb.add_field(name= "<:KannaSip:669635038089838602>", value= "{0}".format({random.choice(args)}))
+		emb.set_footer(text= "Requested by {}".format(ctx.author), icon_url= ctx.author.avatar_url)
+
+		await ctx.send(embed= emb)
 
 def  setup(client):
 	client.add_cog(Ball(client))
