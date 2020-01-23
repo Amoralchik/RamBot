@@ -25,7 +25,7 @@ class info(commands.Cog):
         emb = discord.Embed(colour=discord.Colour.magenta())
         emb.add_field(name= "Version", value= "Версия: 0.91")
         emb.add_field(name= "Last Update", value= "23/01/2020")
-        emb.add_field(name= "Github", value= "https://github.com/Amoralchik/RamBot" inline=False)
+        emb.add_field(name= "Github", value= "https://github.com/Amoralchik/RamBot", inline=False)
         emb.set_footer(text= "Requested by {}".format(user.name), icon_url= user.avatar_url)
         
         await ctx.send( embed= emb )
