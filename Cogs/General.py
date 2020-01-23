@@ -16,21 +16,6 @@ class Administrator(commands.Cog):
 		self.bot = bot
 		self._last_member = None
 
-	@commands.command()
-	@commands.has_permissions(administrator = True)
-	async def setprefix(self, ctx, prefix):
-		"""Устанавливает префикс комманд бота, нельзя использовать упоминания/пробелы!"""
-		
-		with open("prefixes.json","r") as f:
-			prefixes = json.load(f)
-	
-		prefixes[str(ctx.guild.id)] = prefix
-
-		with open("prefixes.json","w") as f:
-			json.dump(prefixes, f, indent=4)
-        
-		await ctx.send(f"Префихс изменнен на: {prefix}")
-
 	@commands.command(aliases=["Delete","d"])
 	@commands.has_permissions(administrator = True)
 	async def delete(self, ctx, amount: int):
