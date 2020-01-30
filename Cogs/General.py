@@ -19,7 +19,7 @@ class Administrator(commands.Cog):
 	@commands.command()
 	@commands.has_permissions(administrator = True)
 	async def setprefix(self, ctx, prefix):
-		"""Устанавливает префикс комманд бота, нельзя использовать упоминания/пробелы!"""
+		"""Устанавливает префикс комманд бота, нельзя использовать пробелы!"""
 		
 		with open("prefixes.json","r") as f:
 			prefixes = json.load(f)

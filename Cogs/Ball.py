@@ -66,9 +66,10 @@ class Ball(commands.Cog):
 	@commands.command()
 	async def choose(self, ctx, *args):
 		""" args """
+		choice = random.choice(args)
 		
 		emb= discord.Embed( colour=discord.Colour.magenta())
-		emb.add_field(name= "<:KannaSip:669635038089838602>", value= "{0}".format({random.choice(args)}))
+		emb.add_field(name= "<:KannaSip:669635038089838602>", value= " ".join(choice))
 		emb.set_footer(text= "Requested by {}".format(ctx.author), icon_url= ctx.author.avatar_url)
 
 		await ctx.send(embed= emb)

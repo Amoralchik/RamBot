@@ -1,5 +1,5 @@
 """
-Amoral BOT 0.90 by Amoralchik
+Amoral BOT 0.93 by Amoralchik
 2019-2020 (c)
 2019 - RamBot - Last verison 0.85
 """
@@ -24,21 +24,22 @@ def get_prefix(bot, message):
 
 	return prefixes[str(message.guild.id)]    	
 
-Version =  ("Version: 0.91 // Last Update: 23/01/2020")
-status = cycle([ Version, "PlsDrop - Toxic", "Amoralove"])
+Version =  ("Version: 0.93 // Last Update: 30/01/2020")
+status = cycle([ Version, "with @AMORALCHIK#1613 ", "with @Bl00dWolf#0001 "])
 
-#Префикс вызова бота
 bot = commands.Bot(command_prefix= get_prefix,
                    description=Version)
 
-@tasks.loop(seconds=15)
+bot.remove_command("help")
+
+@tasks.loop(seconds=60)
 async def change_status():
 	await bot.change_presence(activity=discord.Game(next(status)))
 
 @bot.event
 async def on_ready():
 	change_status.start()
-	print("Вход как: {0.user}".format(bot) + " Выполнен. " + Version )
+	print("Logged in as: {0.user}".format(bot) + " Done. \n" + Version )
 
 @bot.event
 async def on_guild_join(guild):

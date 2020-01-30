@@ -16,21 +16,6 @@ class Rp(commands.Cog):
         self._last_member = None
 
     @commands.command()
-    async def rem(self, ctx):
-        """rem"""
-        author = ctx.author.mention
-        
-        choices = ['https://cs8.pikabu.ru/post_img/big/2016/07/24/11/1469388026197790044.jpg','https://i.pinimg.com/originals/f2/e4/8d/f2e48d0ed2e419df01ea4807fbf767cd.png','https://cs8.pikabu.ru/post_img/2017/01/28/6/1485591472150435448.jpg']
-        
-        image = random.choice(choices)
-        
-        emb = discord.Embed(description="", colour=discord.Colour.magenta())
-        emb.set_image(url=image)
-        emb.set_footer(text= "Requested by {}".format(ctx.author), icon_url= ctx.author.avatar_url)
-
-        await ctx.send(embed= emb)
-
-    @commands.command()
     async def kiss(self, ctx, member: discord.Member):
         """Kiss"""
         author = ctx.author.mention
