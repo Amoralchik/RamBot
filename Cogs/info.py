@@ -14,43 +14,42 @@ from itertools import cycle
 from discord import Spotify, Game, Streaming, CustomActivity
 
 class info(commands.Cog):
-    #Класс 1
+
     def __init__(self, bot):
         self.bot = bot
         self._last_member = None 
 
-    @commands.command(aliases=["help"])
+    @commands.command(aliases=["help"], error= "ctx error")
     async def Help(self, ctx):
 
         emb = discord.Embed(title= (f"{self.bot.user.name}"), url= "https://discordapp.com/oauth2/authorize?client_id=308615211462426625&permissions=8&scope=bot" ,colour=discord.Colour.magenta())
         emb.add_field(name= "✨Admin", value= "• setprefix \n • delete")
         emb.add_field(name= "❓8Ball", value= "• Yesornot \n • 8ball \n • choose")
         emb.add_field(name= "🗺Info", value= "• Version \n • ping \n • emojis \n • serverinfo \n • userinfo \n • avatar")
-        emb.add_field(name= "💕RP", value= "• Hug \n • Put \n • Kiss")
-        emb.add_field(name= "🎨Yandere", value= "• tag_yandere \n • new_yandere \n • last_yandere \n • random_yandere")
+        emb.add_field(name= "💕RP", value= "• Hug \n • Put \n • Kiss \n • Triggered \n • Thinking \n • Fight \n • Angry \n • Cry")
+        emb.add_field(name= "🎨Yandere", value= "• yanderetag \n • yanderenew \n • yanderelast \n • yandererandom \n • yanderetop1d \n • yanderetop1w \n • yanderetop1m \n • yanderetop1y")
         emb.add_field(name= "Other", value= "• Amo \n • help \n • Povtor \n • yes")
         emb.add_field(name= "🎶Music", value= "• join \n • leave \n • loop \n • now \n • pause \n • play \n • queue \n • remove \n • resume \n • shuffle \n • skip \n • stop \n • summon \n • volume")
-        emb.add_field(name= "Bot info", value= "• Created by <@306125994396483587> \n • Version: 0.93 \n • Music by Valentin B.")
+        emb.add_field(name= "Bot info", value= "• Created by <@306125994396483587> \n • Version: 0.95 \n • Music by Valentin B.")
         emb.set_thumbnail(url= self.bot.user.avatar_url_as(static_format='png'))
         emb.set_footer(text= "Requested by {}".format(ctx.author.name), icon_url= ctx.author.avatar_url)
         
         await ctx.send( embed= emb )
 
-    @commands.command(aliases=["version","Vrs","vrs"])
+    @commands.command(aliases=["version", "vrs"], brief= "Version info", error= "ctx error")
     async def Version(self, ctx):
         """ "версия","Версия","vrs" показывает текушую версию бота"""
 
         emb = discord.Embed(colour=discord.Colour.magenta())
-        emb.add_field(name= "Version", value= "0.93")
-        emb.add_field(name= "Last Update", value= "30/01/2020")
+        emb.add_field(name= "Version", value= "0.94")
+        emb.add_field(name= "Last Update", value= "04/02/2020")
         emb.set_footer(text= "Requested by {}".format(ctx.author.name), icon_url= ctx.author.avatar_url)
         
         await ctx.send( embed= emb )
 
 	#Показывает пинг
-    @commands.command(aliases=["Пинг", "пинг"])
-    async def ping(self, ctx):
-        """ "Пинг", "пинг" Показывает Пинг"""
+    @commands.command(aliases=["ping"], brief= "Ping info", error= "ctx error")
+    async def Ping(self, ctx):
         
         emb = discord.Embed(colour=discord.Colour.magenta())
         emb.add_field(name= "Ping", value= (f"Pong: {(round(self.bot.latency * 1000))}ms"))
@@ -58,8 +57,8 @@ class info(commands.Cog):
         
         await ctx.send(embed= emb)
     
-    @commands.command(pass_context=True)
-    async def emojis(self, ctx, guild: discord.Guild = None):
+    @commands.command(aliases=["emojis"], brief= "Emoji info", error= "ctx error")
+    async def Emojis(self, ctx, guild: discord.Guild = None):
         """ Server Emoji """
 
         guild = guild or ctx.guild
@@ -73,8 +72,8 @@ class info(commands.Cog):
         
         await ctx.send(embed= emb)
 
-    @commands.command(pass_context= True)
-    async def serverinfo(self, ctx, guild: discord.Guild = None):
+    @commands.command(aliases=["serverinfo"], brief= "Server info", error= "ctx error")
+    async def Serverinfo(self, ctx, guild: discord.Guild = None):
         """ Информация о Сервере """
         
         guild = guild or ctx.guild
@@ -98,8 +97,8 @@ class info(commands.Cog):
         
         await ctx.send(embed= emb)
 
-    @commands.command(pass_context= True)
-    async def userinfo(self, ctx, member: discord.Member = None):
+    @commands.command(aliases=["userinfo"], brief= "User info", error= "ctx error")
+    async def Userinfo(self, ctx, member: discord.Member = None):
         """ Информация о пользователе """
 
         discord.User = member or ctx.author
@@ -109,36 +108,42 @@ class info(commands.Cog):
         activitiesname = ([activities.name for activities in member.activities])
 
         emb = discord.Embed(title= "Info about {}".format(member.name), colour=discord.Colour.magenta())
-        emb.add_field(name= "Name", value= member.name)
         emb.add_field(name= "Сreated", value= str(discord.User.created_at)[:16])
 
         if member.display_name == member.name:
             pass
         else:
-            emb.add_field(name= "Server name", value= member.display_name)
+            emb.add_field(name= "Server name", value= " ** " + member.display_name + " ** ")
            
-        if str(activitiesname) != "[]":    
-            for activity in member.activities:
-                if isinstance(activity, Spotify):
-                    emb.add_field(name= "Listen", value= " ".join(Spotifytitle) + " **by** " + " ".join(Spotifyartist))
-                elif isinstance(activity, Game):
-                    emb.add_field(name= "Game", value= f" playing to {activity.name}")
-                elif isinstance(activity, CustomActivity):
-                    emb.add_field(name= "Custom Status", value= f"{activity.emoji} {activity.name}")
-        else:
-            pass
-
         emb.add_field(name= "Joined at", value= str(member.joined_at)[:16])
         emb.add_field(name= "ID", value= member.id)
         emb.add_field(name= "Status", value= member.status)
-        emb.add_field(name= "Roles", value= str(len(rolelist)) + " : " +   " | ".join(rolelist) )
+        
+        if str(activitiesname) != "[]":    
+            for activity in member.activities:
+                
+                if isinstance(activity, Streaming):
+                    emb.add_field(name= "Streaming", value=f"{member} is streaming it {activity.name} \n  {activity.url}", inline = False)
+
+                if isinstance(activity, Spotify):
+                    emb.add_field(name= "Listen", value= f"** {activity.title} ** by ** {activity.artists[0]} **", inline = False)
+
+                if isinstance(activity, Game):
+                    emb.add_field(name= "Game", value= f" playing to ** {activity.name} **", inline = False)
+
+                if isinstance(activity, CustomActivity):
+                    emb.add_field(name= "Custom Status", value= f"{activity.emoji} ** {activity.name} **")
+        else:
+            pass
+
+        emb.add_field(name= "Roles", value= str(len(rolelist)) + " : " +   " | ".join(rolelist), inline = False)
         emb.set_thumbnail(url= member.avatar_url_as(static_format='png'))
         emb.set_footer(text= "Requested by {}".format(ctx.author), icon_url= ctx.author.avatar_url)
         
         await ctx.send(embed= emb)
 
-    @commands.command(pass_context= True)
-    async def avatar(self, ctx, user: discord.User = None):
+    @commands.command(aliases=["avatar"], brief= "User avatar", error= "ctx error")
+    async def Avatar(self, ctx, user: discord.User = None):
         """ Показывает аватар пользывателя """
         
         user = user or ctx.author
