@@ -2,6 +2,7 @@
 Amoral BOT 0.95 by Amoralchik
 2019-2020 (С)
 2019 - RamBot - Last verison 0.85
+RIP 24.02.2020
 """
 
 import asyncio
